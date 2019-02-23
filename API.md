@@ -253,15 +253,13 @@
 
 <!-- tocstop -->
 
-## Server2222
+## Server
 
-The server object is the main application container. The server manages all incoming requests
-along with all the facilities provided by the framework. Each server supports a single connection
-(e.g. listen to port `80`).
+server 对象是主应用程序容器。 server 管理所有传入的请求以及框架提供的所有设施。 每个 server 都支持单个连接（例如，监听'80`端口）。
 
 ### <a name="server()" /> `server([options])`
 
-Creates a new server object where:
+创建一个新的 server 对象，其中：
 - `options` - (optional) a [server configuration object](#server.options).
 
 ```js
@@ -272,64 +270,47 @@ const server = Hapi.server({ load: { sampleInterval: 1000 } });
 
 ### <a name="server.options" /> Server options
 
-The server options control the behavior of the server object. Note that the options object is
-deeply cloned (with the exception of [`listener`](#server.options.listener) which is shallowly
-copied) and should not contain any values that are unsafe to perform deep copy on.
+server options 控制 server 对象的行为。 请注意， options 对象被深度克隆（除了被轻微复制的侦听器之外），并且不应包含任何不安全的值来执行深层复制。
 
-All options are optionals.
+所有选项都是可选项。
 
 #### <a name="server.options.address" /> `server.options.address`
 
-Default value: `'0.0.0.0'` (all available network interfaces).
+默认值：`'0.0.0.0'`（所有可用的网络接口）。
 
-Sets the hostname or IP address the server will listen on. If not configured, defaults to
-[`host`](#server.options.host) if present, otherwise to all available network interfaces. Set to
-`'127.0.0.1'` or `'localhost'` to restrict the server to only those coming from the same host.
+设置服务器将侦听的主机名或IP地址。 如果未配置，则默认为 [`host`](#server.options.host)（如果存在），否则为所有可用的网络接口。设置为 `'127.0.0.1'` 或 `'localhost'` 将服务器限制为仅来自同一主机的服务器。
 
 #### <a name="server.options.app" /> `server.options.app`
 
-Default value: `{}`.
+默认值： `{}` 。
 
-Provides application-specific configuration which can later be accessed via
-[`server.settings.app`](#server.settings). The framework does not interact with this object. It is
-simply a reference made available anywhere a `server` reference is provided.
+提供特定于应用程序的配置，以后可以通过它进行访问 [`server.settings.app`](#server.settings) 。框架不与此对象交互。 它是只需在提供 `server` 引用的任何地方提供引用即可。
 
-Note the difference between `server.settings.app` which is used to store static configuration
-values and [`server.app`](#server.app) which is meant for storing run-time state.
+注意 `server.settings.app` 之间的区别，它用于存储静态配置值和 [`server.app`](#server.app) ，用于存储运行时状态。
 
 #### <a name="server.options.autolisten" /> `server.options.autoListen`
 
-Default value: `true`.
+默认值：`true` 。
 
-Used to disable the automatic initialization of the [`listener`](#server.options.listener). When
-`false`, indicates that the [`listener`](#server.options.listener) will be started manually outside
-the framework.
+用于禁用 [`listener`](#server.options.listener) 的自动初始化。当 `false` 时，表示 [`listener`](#server.options.listener) 将在外部手动启动该框架。
 
-Cannot be set to `false` along with a [`port`](#server.options.port) value.
+不能与 [`port`](#server.options.port) 值一起设置为 `false` 。
 
 #### <a name="server.options.cache" /> `server.options.cache`
 
-Default value: `{ provider: { constructor: require('catbox-memory'), options: { partition: 'hapi-cache' } } }`.
+默认值：`{ provider: { constructor: require('catbox-memory'), options: { partition: 'hapi-cache' } } }` 。
 
-Sets up server-side caching providers. Every server includes a default cache for storing
-application state. By default, a simple memory-based cache is created which has limited capacity
-and capabilities.
+设置服务器端缓存提供程序。 每个服务器都包含一个用于存储应用程序状态的默 默认情况下，会创建一个简单的基于内存的缓存，其容量和功能有限。
 
-**hapi** uses [**catbox**](https://github.com/hapijs/catbox) for its cache implementation which
-includes support for common storage solutions (e.g. Redis, MongoDB, Memcached, Riak, among others).
-Caching is only utilized if [methods](#server.methods) and [plugins](#plugins) explicitly store
-their state in the cache.
+**hapi** 使用 [**catbox**](https://github.com/hapijs/catbox) 进行缓存实现，包括对常见存储解决方案的支持（例如 Redis ， MongoDB ， Memcached ， Riak 等）。仅当 [methods](#server.methods) 和 [plugins](#plugins) 将其状态显式存储在缓存中时才使用缓存。
 
-The server cache configuration only defines the storage container itself. The configuration can be
-assigned one or more (array):
+服务器缓存配置仅定义存储容器本身。 可以为配置分配一个或多个（ array ）：
 
-- a class or prototype function (usually obtained by calling `require()` on a **catbox** strategy
-    such as `require('catbox-redis')`). A new **catbox** [client](https://github.com/hapijs/catbox#client)
-    will be created internally using this constructor.
+- 一个类或原型函数（通常通过在 **catbox** 策略上调用 `require()` 来获得，例 `require('catbox-redis')`）。 将使用此构造函数在内部创建新的 **catbox** [client]        (https://github.com/hapijs/catbox#client) 。
 
-- a configuration object with the following:
+- 配置对象如下:
 
-    - `engine` - a **catbox** engine object instance.
+    - `engine` - 一个 **catbox** engine 对象实例。
 
     - `name` - an identifier used later when provisioning or configuring caching for
         [server methods](#server.methods) or [plugins](#plugins). Each cache name must be unique.
