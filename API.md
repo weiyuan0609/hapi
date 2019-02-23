@@ -2,7 +2,7 @@
 
 <!-- toc -->
 
-- [Server2](#server)
+- [Server](#server)
   - [`server([options])`](#server())
   - [Server options](#server.options)
     - [`server.options.address`](#server.options.address)
@@ -253,7 +253,7 @@
 
 <!-- tocstop -->
 
-## Server
+## Server222222
 
 The server object is the main application container. The server manages all incoming requests
 along with all the facilities provided by the framework. Each server supports a single connection
