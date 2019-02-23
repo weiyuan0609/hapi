@@ -253,11 +253,11 @@
 
 <!-- tocstop -->
 
-## Server2222
+## Server
 
 The server object is the main application container. The server manages all incoming requests
 along with all the facilities provided by the framework. Each server supports a single connection
-(e.g. listen to port `80`).gdfg
+(e.g. listen to port `80`).
 
 ### <a name="server()" /> `server([options])`
 
