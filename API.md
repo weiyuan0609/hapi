@@ -2,7 +2,7 @@
 
 <!-- toc -->
 
-- [Server](#server)
+- [Server2](#server)
   - [`server([options])`](#server())
   - [Server options](#server.options)
     - [`server.options.address`](#server.options.address)
