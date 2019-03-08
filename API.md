@@ -260,7 +260,7 @@ server 对象是主应用程序容器。 server 管理所有传入的请求以�
 ### <a name="server()" /> `server([options])`
 
 创建一个新的 server 对象，其中：
-- `options` - (optional) a [server configuration object](#server.options).
+- `options` - （可选） [server configuration object](#server.options) 。
 
 ```js
 const Hapi = require('hapi');
